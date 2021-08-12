@@ -436,10 +436,10 @@ class Currency {
     this.code = timezoneToCurrency[this.timeZone] || 'USD';
   }
 
-  static async fromUSD({ amount, timeZone }) {
+  static async fromUSD({ amount, timeZone, apiKey }) {
     let currency = new Currency({ amount, timeZone });
     let rate = await fetch('https://api.depay.pro/v1/fiat?symbol=' + currency.code, {
-      headers: { 'X-Api-Key': Currency.apiKey },
+      headers: { 'X-Api-Key': apiKey },
     })
       .then((response) => response.json())
       .then((data) => parseFloat(data.usd));

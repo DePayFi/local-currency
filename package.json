@@ -1,7 +1,7 @@
 {
   "name": "depay-local-currency",
   "moduleName": "LocalCurrency",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "JavaScript library that detects user's currency and provides functionalities to convert between multiple currencies.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -10,12 +10,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && rollup -c",
+    "build": "rm -rf dist && rollup -c rollup.module.config.js",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "format": "prettier src --write",
     "prepublishOnly": "yarn build",
-    "start": "rollup -c rollup.demo.config.js -w",
+    "dev": "rollup -c rollup.dev.config.js -w",
     "test:units": "yarn build && npx jest --no-cache",
     "test": "yarn test:units"
   },
@@ -32,8 +31,7 @@
   },
   "homepage": "https://github.com/DePayFi/depay-local-currency#readme",
   "private": false,
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {},
   "engines": {
     "node": ">=10"
@@ -51,13 +49,12 @@
     "babel-preset-react": "^6.24.1",
     "cypress": "^6.2.1",
     "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1",
+    "fetch-mock": "^9.11.0",
+    "node-fetch": "^2.6.1",
     "regenerator-runtime": "^0.13.7",
     "rollup": "^2.34.2",
     "rollup-plugin-delete": "^2.0.0",

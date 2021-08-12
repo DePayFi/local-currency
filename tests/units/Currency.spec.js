@@ -1,7 +1,10 @@
+import fetchMock from 'fetch-mock'
 import timezoneToCurrency from '../../src/timezoneToCurrency'
 import { Currency } from 'dist/cjs/index.js'
 
 describe('Currency', () => {
+
+  beforeEach(()=>fetchMock.reset())
 
   it('provides current timezone', async ()=> {
     expect(Currency.timeZone()).toBeDefined()
@@ -56,24 +59,19 @@ describe('Currency', () => {
     })
   })
 
-  it('allows to configure the apiKey for conversion', async ()=> {
-    Currency.apiKey = 'AWZ'
-    expect(Currency.apiKey).toEqual('AWZ')
-  })
-
   describe('fetch currency rate', ()=>{
 
     beforeEach(()=>{
-      global.fetch = jest.fn(() =>
-        Promise.resolve({
-          json: () => Promise.resolve({ usd: '5.32' })
-        })
-      );
+      fetchMock.get({
+          url: 'https://api.depay.pro/v1/fiat?symbol=EUR',
+          headers: { 'X-Api-Key': 'Test123' },
+          overwriteRoutes: true
+        }, { usd: '5.32' }
+      )
     })
 
     it('converts currency via API', async ()=> {
-      Currency.apiKey = 'AWZ'
-      let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin' })
+      let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin', apiKey: 'Test123' })
       expect(currency.toString()).toEqual('€106.40')
     })
   })
