@@ -11,6 +11,8 @@ npm install --save depay-local-currency
 ```
 
 ```javascript
+import { Currency } from 'depay-local-currency'
+
 let currency = new Currency({ amount: 20 })
 currency.toString()
 // €22.32
