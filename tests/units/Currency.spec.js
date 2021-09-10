@@ -74,6 +74,11 @@ describe('Currency', () => {
       let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin', apiKey: 'Test123' })
       expect(currency.toString()).toEqual('€106.40')
     })
+
+    it('converts currency via API also for given code', async ()=> {
+      let currency = await Currency.fromUSD({ amount: 20, code: 'EUR', apiKey: 'Test123' })
+      expect(currency.toString()).toEqual('€106.40')
+    })
   })
 
   describe('set code explicitly', ()=> {
