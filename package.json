@@ -1,7 +1,7 @@
 {
   "name": "depay-local-currency",
   "moduleName": "LocalCurrency",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "JavaScript library that detects user's currency and provides functionalities to convert between multiple currencies.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",

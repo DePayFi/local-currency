@@ -75,4 +75,19 @@ describe('Currency', () => {
       expect(currency.toString()).toEqual('€106.40')
     })
   })
+
+  describe('set code explicitly', ()=> {
+    
+    it('converts currency to string', async ()=> {
+      expect(
+        (new Currency({ amount: 22.321, code: 'EUR' })).toString()
+      ).toEqual('€22.32')
+      expect(
+        (new Currency({ amount: 22.321, code: 'CHF' })).toString()
+      ).toEqual('CHF 22.32')
+      expect(
+        (new Currency({ amount: 22.321, code: 'USD' })).toString()
+      ).toEqual('$22.32')
+    })
+  })
 });

@@ -426,14 +426,14 @@ var timezoneToCurrency = {
 };
 
 class Currency {
-  constructor({ amount, timeZone = Currency.timeZone() }) {
+  constructor({ amount, code, timeZone = Currency.timeZone() }) {
     this.amount = amount;
+    this.code = code || timezoneToCurrency[timeZone] || 'USD';
     this.timeZone = timeZone;
-    this.code = timezoneToCurrency[this.timeZone] || 'USD';
   }
 
-  static async fromUSD({ amount, timeZone, apiKey }) {
-    let currency = new Currency({ amount, timeZone });
+  static async fromUSD({ amount, code, timeZone, apiKey }) {
+    let currency = new Currency({ amount, code, timeZone });
     let rate = await fetch('https://api.depay.pro/v1/fiat?symbol=' + currency.code, {
       headers: { 'X-Api-Key': apiKey },
     })
