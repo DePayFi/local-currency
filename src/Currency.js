@@ -9,11 +9,11 @@ class Currency {
 
   static async fromUSD({ amount, code, timeZone, apiKey }) {
     let currency = new Currency({ amount, code, timeZone })
-    let rate = await fetch('https://api.depay.pro/v1/fiat?symbol=' + currency.code, {
+    let rate = await fetch('https://api.depay.fi/v2/currencies/' + currency.code, {
       headers: { 'X-Api-Key': apiKey },
     })
       .then((response) => response.json())
-      .then((data) => parseFloat(data.usd))
+      .then((data) => parseFloat(data))
     currency.amount = currency.amount * rate
     return currency
   }
