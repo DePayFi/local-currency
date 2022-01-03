@@ -1,6 +1,6 @@
 import fetchMock from 'fetch-mock'
 import timezoneToCurrency from '../../src/timezoneToCurrency'
-import { Currency } from 'dist/cjs/index.js'
+import { Currency } from 'src'
 
 describe('Currency', () => {
 
