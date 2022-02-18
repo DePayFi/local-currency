@@ -434,8 +434,12 @@
   class Currency {
     constructor({ amount, code, timeZone = Currency.timeZone() }) {
       this.amount = amount;
-      this.code = code || timezoneToCurrency[timeZone] || 'USD';
+      this.code = code || Currency.getCode(timeZone);
       this.timeZone = timeZone;
+    }
+
+    static getCode(timeZone) {
+      return timezoneToCurrency[timeZone || Currency.timeZone()] || 'USD'
     }
 
     static async fromUSD({ amount, code, timeZone, apiKey }) {

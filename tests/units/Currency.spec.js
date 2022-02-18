@@ -95,4 +95,10 @@ describe('Currency', () => {
       ).toEqual('$22.32')
     })
   })
+
+  it('provides just the code', async ()=> {
+    expect(
+      Currency.getCode('Europe/Berlin')
+    ).toEqual('EUR')
+  })
 });
