@@ -60,6 +60,15 @@ Requires you to pass an `apiKey` in order to convert currencies!
 
 See: https://depay.fi/documentation/api#fiat
 
+### getCode
+
+Gives you the local currency code:
+
+```javascript
+Currency.getCode()
+// EUR
+```
+
 ## Development
 
 ### Get started
