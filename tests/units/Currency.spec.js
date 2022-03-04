@@ -63,8 +63,7 @@ describe('Currency', () => {
 
     beforeEach(()=>{
       fetchMock.get({
-          url: 'https://api.depay.fi/v2/currencies/EUR',
-          headers: { 'X-Api-Key': 'Test123' },
+          url: 'https://public.depay.fi/currencies/EUR',
           overwriteRoutes: true
         }, "5.3212321"
       )

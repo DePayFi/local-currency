@@ -51,14 +51,10 @@ currency.toString()
 Converts USD into local currency:
 
 ```javascript
-let currency = await Currency.fromUSD({ amount: 20, apiKey: 'MY-API-KEY' })
+let currency = await Currency.fromUSD({ amount: 20 })
 currency.toString()
 // €16.88
 ```
-
-Requires you to pass an `apiKey` in order to convert currencies!
-
-See: https://depay.fi/documentation/api#fiat
 
 ### getCode
 
