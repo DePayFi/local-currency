@@ -70,13 +70,28 @@ describe('Currency', () => {
     })
 
     it('converts currency via API', async ()=> {
-      let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin', apiKey: 'Test123' })
+      let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin' })
       expect(currency.toString()).toEqual('€106.42')
     })
 
     it('converts currency via API also for given code', async ()=> {
-      let currency = await Currency.fromUSD({ amount: 20, code: 'EUR', apiKey: 'Test123' })
+      let currency = await Currency.fromUSD({ amount: 20, code: 'EUR' })
       expect(currency.toString()).toEqual('€106.42')
+    })
+
+    describe('api unreachable', ()=>{
+      beforeEach(()=>{
+        fetchMock.get({
+            url: 'https://public.depay.fi/currencies/EUR',
+            overwriteRoutes: true
+          }, 500
+        )
+      })
+
+      it('leaves it in USD and does not convert it', async ()=> {
+        let currency = await Currency.fromUSD({ amount: 20, timeZone: 'Europe/Berlin' })
+        expect(currency.toString()).toEqual('$20.00')
+      })
     })
   })
 

@@ -16,6 +16,10 @@ class Currency {
     let rate = await fetch('https://public.depay.fi/currencies/' + currency.code)
       .then((response) => response.json())
       .then((data) => parseFloat(data))
+      .catch(()=>{
+        currency.code = "USD"
+        return 1
+      })
     currency.amount = currency.amount * rate
     return currency
   }
