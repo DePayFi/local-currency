@@ -442,6 +442,13 @@
       return timezoneToCurrency[timeZone || Currency.timeZone()] || 'USD'
     }
 
+    static async rate({ from, to }) {
+      if(to == undefined) { to = Currency.getCode(); }
+      let fromToUsd = await Currency.fromUSD({ amount: 1, code: from });
+      let toToUsd = await Currency.fromUSD({ amount: 1, code: to });
+      return fromToUsd.amount / toToUsd.amount
+    }
+
     static async fromUSD({ amount, code, timeZone }) {
       let currency = new Currency({ amount, code, timeZone });
       let rate = await fetch('https://public.depay.fi/currencies/' + currency.code)

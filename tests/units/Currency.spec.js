@@ -115,4 +115,25 @@ describe('Currency', () => {
       Currency.getCode('Europe/Berlin')
     ).toEqual('EUR')
   })
+
+  describe('fetch and provide rates for given from/to', ()=>{
+
+    beforeEach(()=>{
+      fetchMock.get({
+          url: 'https://public.depay.fi/currencies/EUR',
+          overwriteRoutes: true
+        }, "0.95"
+      )
+      fetchMock.get({
+          url: 'https://public.depay.fi/currencies/GBP',
+          overwriteRoutes: true
+        }, "0.82"
+      )
+    })
+
+    it.only('provides rate for given from to', async ()=> {
+      let rate = await Currency.rate({ from: 'EUR', to: 'GBP' })
+      expect(rate).toEqual(1.1585365853658536)
+    })
+  })
 });

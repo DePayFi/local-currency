@@ -56,6 +56,15 @@ currency.toString()
 // €16.88
 ```
 
+### rate
+
+Gets rate for given `from` and `to`:
+
+```javascript
+let rate = await Currency.rate({ from: 'EUR', to: 'GBP' })
+// 1.1585365853658536
+```
+
 ### getCode
 
 Gives you the local currency code:
