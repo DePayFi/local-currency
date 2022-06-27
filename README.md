@@ -81,6 +81,14 @@ Currency.getCode()
 // EUR
 ```
 
+### set currency
+
+Globally (e.g. tests etc.):
+
+```javascript
+Currency.code = 'EUR'
+```
+
 ## Development
 
 ### Get started

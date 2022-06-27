@@ -428,7 +428,7 @@ var timezoneToCurrency = {
 class Currency {
   constructor({ amount, code, timeZone = Currency.timeZone() }) {
     this.amount = amount;
-    this.code = code || Currency.getCode(timeZone);
+    this.code = code || Currency.code || Currency.getCode(timeZone);
     this.timeZone = timeZone;
   }
 
