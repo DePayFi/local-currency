@@ -46,6 +46,13 @@ currency.toString()
 // €22.32
 ```
 
+`options`: accepts options object that will be forwarded to `Intl.NumberFormat`
+
+```javascript
+new LocalCurrency.Currency({ amount: 20 }).toString({ maximumFractionDigits: 0 })
+// $20
+```
+
 ### fromUSD
 
 Converts USD into local currency:

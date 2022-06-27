@@ -466,8 +466,8 @@
       return Intl.DateTimeFormat().resolvedOptions().timeZone
     }
 
-    toString() {
-      return new Intl.NumberFormat(navigator.language, {
+    toString(options = {}) {
+      return new Intl.NumberFormat(navigator.language, {...options,
         style: 'currency',
         currency: this.code,
       }).format(this.amount)
