@@ -81,12 +81,12 @@ Currency.getCode()
 // EUR
 ```
 
-### set currency
+### set currency globally
 
-Globally (e.g. tests etc.):
+e.g. in tests etc.:
 
 ```javascript
-Currency.code = 'EUR'
+window._LocalCurrencyCode = 'EUR'
 ```
 
 ## Development
