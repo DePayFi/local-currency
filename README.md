@@ -49,7 +49,7 @@ currency.toString()
 `options`: accepts options object that will be forwarded to `Intl.NumberFormat`
 
 ```javascript
-new LocalCurrency.Currency({ amount: 20 }).toString({ maximumFractionDigits: 0 })
+new LocalCurrency.Currency({ amount: 20 }).toString({ minimumFractionDigits: 0 })
 // $20
 ```
 
