@@ -433,7 +433,7 @@ class Currency {
   }
 
   static getCode(timeZone) {
-    return timezoneToCurrency[timeZone || Currency.timeZone()] || 'USD'
+    return window._LocalCurrencyCode || timezoneToCurrency[timeZone || Currency.timeZone()] || 'USD'
   }
 
   static async rate({ from, to }) {
