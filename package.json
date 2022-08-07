@@ -24,7 +24,7 @@
     "currencies",
     "conversion"
   ],
-  "author": "depay.fi",
+  "author": "depay.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DePayFi/local-currency/issues"
