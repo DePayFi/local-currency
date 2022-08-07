@@ -445,7 +445,7 @@ class Currency {
 
   static async fromUSD({ amount, code, timeZone }) {
     let currency = new Currency({ amount, code, timeZone });
-    let rate = await fetch('https://public.depay.fi/currencies/' + currency.code)
+    let rate = await fetch('https://public.depay.com/currencies/' + currency.code)
       .then((response) => response.json())
       .then((data) => parseFloat(data))
       .catch(()=>{

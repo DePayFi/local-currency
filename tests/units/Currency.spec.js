@@ -63,7 +63,7 @@ describe('Currency', () => {
 
     beforeEach(()=>{
       fetchMock.get({
-          url: 'https://public.depay.fi/currencies/EUR',
+          url: 'https://public.depay.com/currencies/EUR',
           overwriteRoutes: true
         }, "5.3212321"
       )
@@ -82,7 +82,7 @@ describe('Currency', () => {
     describe('api unreachable', ()=>{
       beforeEach(()=>{
         fetchMock.get({
-            url: 'https://public.depay.fi/currencies/EUR',
+            url: 'https://public.depay.com/currencies/EUR',
             overwriteRoutes: true
           }, 500
         )
@@ -120,12 +120,12 @@ describe('Currency', () => {
 
     beforeEach(()=>{
       fetchMock.get({
-          url: 'https://public.depay.fi/currencies/EUR',
+          url: 'https://public.depay.com/currencies/EUR',
           overwriteRoutes: true
         }, "0.95"
       )
       fetchMock.get({
-          url: 'https://public.depay.fi/currencies/GBP',
+          url: 'https://public.depay.com/currencies/GBP',
           overwriteRoutes: true
         }, "0.82"
       )
