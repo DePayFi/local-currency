@@ -1,7 +1,7 @@
 {
   "name": "@depay/local-currency",
   "moduleName": "LocalCurrency",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "JavaScript library that detects user's local currency and provides functionalities to convert between multiple currencies.",
   "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
@@ -13,7 +13,6 @@
     "build": "rm -rf dist && rollup -c rollup.module.config.js",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "prepublishOnly": "yarn build",
     "dev": "rollup -c rollup.dev.config.js -w",
     "test:units": "yarn build && npx jest --no-cache",
     "test": "yarn test:units"
