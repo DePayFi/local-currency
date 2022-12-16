@@ -461,6 +461,11 @@ class Currency {
   }
 
   toString(options = {}) {
+    if(options.minimumFractionDigits == undefined && (this.amount % 1 === 0) && this.amount >= 100) {
+      options.minimumFractionDigits = 0;
+    } else if(options.minimumFractionDigits == undefined) {
+      options.minimumFractionDigits = 2;
+    }
     return new Intl.NumberFormat(navigator.language, {...options,
       style: 'currency',
       currency: this.code,

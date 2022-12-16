@@ -110,6 +110,27 @@ describe('Currency', () => {
     })
   })
 
+  describe('optimizes amount of decimals displayed', ()=> {
+    
+    it('converts currency to string', async ()=> {
+      expect(
+        (new Currency({ amount: 1, code: 'EUR' })).toString()
+      ).toEqual('€1.00')
+      expect(
+        (new Currency({ amount: 100, code: 'EUR' })).toString()
+      ).toEqual('€100')
+      expect(
+        (new Currency({ amount: 100.1, code: 'EUR' })).toString()
+      ).toEqual('€100.10')
+      expect(
+        (new Currency({ amount: 99, code: 'EUR' })).toString()
+      ).toEqual('€99.00')
+      expect(
+        (new Currency({ amount: 10000, code: 'EUR' })).toString()
+      ).toEqual('€10,000')
+    })
+  })
+
   it('provides just the code', async ()=> {
     expect(
       Currency.getCode('Europe/Berlin')
@@ -131,7 +152,7 @@ describe('Currency', () => {
       )
     })
 
-    it.only('provides rate for given from to', async ()=> {
+    it('provides rate for given from to', async ()=> {
       let rate = await Currency.rate({ from: 'EUR', to: 'GBP' })
       expect(rate).toEqual(1.1585365853658536)
     })
