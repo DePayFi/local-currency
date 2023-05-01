@@ -12,10 +12,18 @@
     <div class="container">
       <div class="row pt-5">
         <div class="col">
-          <h1>DePay Local Currency</h1>
-          <p>Open the browser inspector and try: `LocalCurrency.Currency`</p>
+          <h1>Local Currency</h1>
+          <div id="timezone"></div>
+          <div id="currency"></div>
         </div>
       </div>
     </div>
+    <script>
+      let currency = new LocalCurrency.Currency({ amount: 1 })
+      window.addEventListener("load", (event) => {
+        document.getElementById('timezone').innerHTML = `Your timezone is <b>${currency.timeZone}</b>`
+        document.getElementById('currency').innerHTML = `Your currency code is <b>${currency.code}</b>`
+      });
+    </script>
   </body>
 </html>
