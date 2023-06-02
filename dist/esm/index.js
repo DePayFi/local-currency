@@ -440,6 +440,9 @@ class Currency {
     if(to == undefined) { to = Currency.getCode(); }
     let fromToUsd = await Currency.fromUSD({ amount: 1, code: from });
     let toToUsd = await Currency.fromUSD({ amount: 1, code: to });
+    if(fromToUsd.code != from || toToUsd.code != to) {
+      throw('Failed fetching rate!')
+    }
     return fromToUsd.amount / toToUsd.amount
   }
 
