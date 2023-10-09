@@ -5,6 +5,7 @@ import { Currency } from 'src'
 describe('Currency', () => {
 
   beforeEach(()=>fetchMock.reset())
+  afterEach(()=>{localStorage.clear()})
 
   it('provides current timezone', async ()=> {
     expect(Currency.timeZone()).toBeDefined()
