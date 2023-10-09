@@ -11,6 +11,14 @@ class Currency {
     return window._LocalCurrencyCode || timezoneToCurrency[timeZone || Currency.timeZone()] || 'USD'
   }
 
+  static getCacheKey(currency) {
+    const now = new Date()
+    const year = now.getUTCFullYear()
+    const month = now.getUTCMonth()
+    const day = now.getUTCDate()
+    return `@depay/local-currency/v3.6.1/rates/${currency}/${year}-${month}-${day}`
+  }
+
   static async rate({ from, to }) {
     if(to == undefined) { to = Currency.getCode() }
     let fromToUsd = await Currency.fromUSD({ amount: 1, code: from })
@@ -23,13 +31,24 @@ class Currency {
 
   static async fromUSD({ amount, code, timeZone }) {
     let currency = new Currency({ amount, code, timeZone })
-    let rate = await fetch('https://public.depay.com/currencies/' + currency.code)
+    const cacheKey = Currency.getCacheKey(currency.code)
+    let cachedValue = localStorage.getItem(cacheKey)
+    let rate
+    if(cachedValue) {
+      rate = cachedValue 
+    } else {
+      rate = await fetch('https://public.depay.com/currencies/' + currency.code)
       .then((response) => response.json())
-      .then((data) => parseFloat(data))
-      .catch(()=>{
+      .then((data) => {
+        let value = parseFloat(data)
+        localStorage.setItem(cacheKey, value)
+        return value
+      })
+      .catch((e)=>{
         currency.code = "USD"
         return 1
       })
+    }
     currency.amount = currency.amount * rate
     return currency
   }
