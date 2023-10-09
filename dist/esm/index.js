@@ -454,6 +454,22 @@ class Currency {
     return fromToUsd.amount / toToUsd.amount
   }
 
+  static fromUSDSync({ amount, code, timeZone }) {
+    let currency = new Currency({ amount, code, timeZone });
+    const cacheKey = Currency.getCacheKey(currency.code);
+    let cachedValue = localStorage.getItem(cacheKey);
+    let rate;
+    if(cachedValue) {
+      rate = cachedValue; 
+    } else {
+      Currency.fromUSD({ amount, code, timeZone });
+      currency.code = "USD";
+      rate = 1;
+    }
+    currency.amount = currency.amount * rate;
+    return currency
+  }
+
   static async fromUSD({ amount, code, timeZone }) {
     let currency = new Currency({ amount, code, timeZone });
     const cacheKey = Currency.getCacheKey(currency.code);
