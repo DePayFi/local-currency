@@ -12,11 +12,7 @@ class Currency {
   }
 
   static getCacheKey(currency) {
-    const now = new Date()
-    const year = now.getUTCFullYear()
-    const month = now.getUTCMonth()
-    const day = now.getUTCDate()
-    return `@depay/local-currency/v3.6.1/rates/${currency}/${year}-${month}-${day}`
+    return `@depay/local-currency/v3.8.1/rates/${currency}`
   }
 
   static async rate({ from, to }) {
@@ -29,11 +25,19 @@ class Currency {
     return fromToUsd.amount / toToUsd.amount
   }
 
+  static getCachedValue(cacheKey) {
+    let cachedValue = localStorage.getItem(cacheKey)
+    if(cachedValue) {
+      cachedValue = JSON.parse(cachedValue)
+      cachedValue = cachedValue.expiresAt < Date.now() ? null : cachedValue.value
+    }
+    return cachedValue
+  }
+
   static fromUSDSync({ amount, code, timeZone }) {
     let currency = new Currency({ amount, code, timeZone })
     const cacheKey = Currency.getCacheKey(currency.code)
-    let cachedValue = localStorage.getItem(cacheKey)
-    let rate
+    let cachedValue = Currency.getCachedValue(cacheKey)
     if(cachedValue) {
       rate = cachedValue 
     } else {
@@ -48,7 +52,7 @@ class Currency {
   static async fromUSD({ amount, code, timeZone }) {
     let currency = new Currency({ amount, code, timeZone })
     const cacheKey = Currency.getCacheKey(currency.code)
-    let cachedValue = localStorage.getItem(cacheKey)
+    let cachedValue = Currency.getCachedValue(cacheKey)
     let rate
     if(cachedValue) {
       rate = cachedValue 
@@ -57,7 +61,7 @@ class Currency {
       .then((response) => response.json())
       .then((data) => {
         let value = parseFloat(data)
-        localStorage.setItem(cacheKey, value)
+        localStorage.setItem(cacheKey, JSON.stringify({ value, expiresAt: Date.now() + (24 * 60 * 60 * 1000) })) // 24 hours
         return value
       })
       .catch((e)=>{
