@@ -38,6 +38,7 @@ class Currency {
     let currency = new Currency({ amount, code, timeZone })
     const cacheKey = Currency.getCacheKey(currency.code)
     let cachedValue = Currency.getCachedValue(cacheKey)
+    let rate
     if(cachedValue) {
       rate = cachedValue 
     } else {
